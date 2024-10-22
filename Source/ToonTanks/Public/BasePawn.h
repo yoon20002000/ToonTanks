@@ -24,7 +24,13 @@ protected:
 private:
 	UPROPERTY()
 	TObjectPtr<UCapsuleComponent> CapsuleComponent;
-	
+
+	UPROPERTY()
+	TObjectPtr<UStaticMeshComponent> BaseMesh;
+	UPROPERTY()
+	TObjectPtr<UStaticMeshComponent> TurretMesh;
+	UPROPERTY()
+	TObjectPtr<USceneComponent> ProjectileSpawnPoint;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
