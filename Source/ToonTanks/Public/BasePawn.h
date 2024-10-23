@@ -22,14 +22,14 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
 	TObjectPtr<UCapsuleComponent> CapsuleComponent;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
 	TObjectPtr<UStaticMeshComponent> BaseMesh;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
 	TObjectPtr<UStaticMeshComponent> TurretMesh;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
 	TObjectPtr<USceneComponent> ProjectileSpawnPoint;
 public:	
 	// Called every frame
