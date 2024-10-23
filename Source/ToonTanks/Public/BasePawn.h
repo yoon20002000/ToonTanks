@@ -26,7 +26,4 @@ private:
 	TObjectPtr<UStaticMeshComponent> TurretMesh;
 	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
 	TObjectPtr<USceneComponent> ProjectileSpawnPoint;
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 };

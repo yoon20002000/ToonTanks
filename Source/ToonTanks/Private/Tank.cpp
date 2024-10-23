@@ -29,6 +29,12 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(PlayerControllerRef != nullptr)
+	{
+		FHitResult HitResult;
+		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
+		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
+	}
 }
 
 void ATank::BeginPlay()
