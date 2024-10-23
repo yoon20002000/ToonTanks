@@ -21,10 +21,14 @@ private:
 	TObjectPtr<UCameraComponent> CameraComp;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	TObjectPtr<USpringArmComponent> SpringArmComp;
-
+	UPROPERTY(EditAnywhere)
+	float MoveSpeed = 200.0f;
 public:
 	ATank();
-
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void Tick(float DeltaTime) override;
 protected:
 	virtual void BeginPlay() override;
+private:
+	void Move(float InValue);
 };
