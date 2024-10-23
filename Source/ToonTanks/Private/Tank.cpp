@@ -34,6 +34,8 @@ void ATank::Tick(float DeltaTime)
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+	PlayerControllerRef = Cast<APlayerController>(GetController());
+	check(PlayerControllerRef);
 }
 
 void ATank::Move(float InValue)

@@ -25,6 +25,8 @@ private:
 	float MoveSpeed = 200.0f;
 	UPROPERTY(EditAnywhere)
 	float TurnRate = 45.0f;
+	UPROPERTY()
+	TObjectPtr<APlayerController> PlayerControllerRef;
 public:
 	ATank();
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
@@ -34,4 +36,5 @@ protected:
 private:
 	void Move(float InValue);
 	void Turn(float InValue);
+	
 };
