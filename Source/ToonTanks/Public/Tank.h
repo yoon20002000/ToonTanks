@@ -23,6 +23,8 @@ private:
 	TObjectPtr<USpringArmComponent> SpringArmComp;
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 200.0f;
+	UPROPERTY(EditAnywhere)
+	float TurnRate = 45.0f;
 public:
 	ATank();
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
@@ -31,4 +33,5 @@ protected:
 	virtual void BeginPlay() override;
 private:
 	void Move(float InValue);
+	void Turn(float InValue);
 };
