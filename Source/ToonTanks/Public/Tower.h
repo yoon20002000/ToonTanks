@@ -18,8 +18,16 @@ private:
 	TObjectPtr<ATank> Tank;
 	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
 	float SearchingDistance = 500.f;
+
+	FTimerHandle FireRateTimerHandle;
+	float FireRate = 2.f;
+	
 public:
 	virtual void Tick(float DeltaTime) override;
 protected:
 	virtual void BeginPlay() override;
+	virtual void Fire() override;
+private:
+	void CheckFireCondition();
+	bool IsInFireRange() const;
 };

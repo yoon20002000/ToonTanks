@@ -34,5 +34,5 @@ public:
 
 protected:
 	void RotateTurret(const FVector& InLookAtTarget) const;
-	void Fire();
+	virtual void Fire();
 };
