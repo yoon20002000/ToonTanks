@@ -13,17 +13,23 @@ class TOONTANKS_API ABasePawn : public APawn
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY(EditAnywhere)
+	float TurretInterpSpeed = 5.f;
+	
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
+protected:
+	void RotateTurret(FVector InLookAtTarget);
 private:
-	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCapsuleComponent> CapsuleComponent;
 
-	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> BaseMesh;
-	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> TurretMesh;
-	UPROPERTY(VisibleAnywhere,meta = (AllowPrivateAccess=true))
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USceneComponent> ProjectileSpawnPoint;
 };

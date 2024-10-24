@@ -33,7 +33,11 @@ void ATank::Tick(float DeltaTime)
 	{
 		FHitResult HitResult;
 		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
+		if(HitResult.IsValidBlockingHit())
+		{
+			DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
+			RotateTurret(HitResult.ImpactPoint);	
+		}
 	}
 }
 
@@ -41,7 +45,6 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	PlayerControllerRef = Cast<APlayerController>(GetController());
-	check(PlayerControllerRef);
 }
 
 void ATank::Move(float InValue)
