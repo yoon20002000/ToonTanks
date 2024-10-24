@@ -23,7 +23,7 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
-void ABasePawn::RotateTurret(FVector InLookAtTarget)
+void ABasePawn::RotateTurret(const FVector& InLookAtTarget) const
 {
 	FVector ToTarget = InLookAtTarget - TurretMesh->GetComponentLocation();
 	FRotator LookAtRotation = FRotator(0, ToTarget.Rotation().Yaw, 0);

@@ -21,7 +21,7 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 protected:
-	void RotateTurret(FVector InLookAtTarget);
+	void RotateTurret(const FVector& InLookAtTarget) const;
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCapsuleComponent> CapsuleComponent;
