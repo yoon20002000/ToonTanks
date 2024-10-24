@@ -10,7 +10,7 @@ ATank::ATank()
 {
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArmComp->SetupAttachment(RootComponent);
-	
+
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComp->SetupAttachment(SpringArmComp);
 }
@@ -19,24 +19,25 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	if(PlayerInputComponent != nullptr)
+	if (PlayerInputComponent != nullptr)
 	{
 		PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 		PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+		PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 	}
 }
 
 void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if(PlayerControllerRef != nullptr)
+	if (PlayerControllerRef != nullptr)
 	{
 		FHitResult HitResult;
 		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
-		if(HitResult.IsValidBlockingHit())
+		if (HitResult.IsValidBlockingHit())
 		{
 			DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
-			RotateTurret(HitResult.ImpactPoint);	
+			RotateTurret(HitResult.ImpactPoint);
 		}
 	}
 }
@@ -50,9 +51,9 @@ void ATank::BeginPlay()
 void ATank::Move(float InValue)
 {
 	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
-	
+
 	FVector DeltaLocation;
-	DeltaLocation.X = InValue* MoveSpeed * DeltaTime;
+	DeltaLocation.X = InValue * MoveSpeed * DeltaTime;
 
 	AddActorLocalOffset(DeltaLocation, true);
 }
@@ -60,6 +61,6 @@ void ATank::Move(float InValue)
 void ATank::Turn(float InValue)
 {
 	FRotator DeltaRotation = FRotator::ZeroRotator;
-	DeltaRotation.Yaw = InValue * TurnRate *UGameplayStatics::GetWorldDeltaSeconds(this);
+	DeltaRotation.Yaw = InValue * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddActorLocalRotation(DeltaRotation, true);
 }

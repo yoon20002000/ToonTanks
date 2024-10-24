@@ -29,6 +29,7 @@ private:
 	TObjectPtr<APlayerController> PlayerControllerRef;
 public:
 	ATank();
+	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
 protected:
@@ -36,5 +37,4 @@ protected:
 private:
 	void Move(float InValue);
 	void Turn(float InValue);
-	
 };
