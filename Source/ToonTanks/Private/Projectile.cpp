@@ -3,6 +3,8 @@
 
 #include "Projectile.h"
 
+#include "GameFramework/ProjectileMovementComponent.h"
+
 // Sets default values
 AProjectile::AProjectile()
 {
@@ -10,6 +12,9 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	MeshComp =CreateDefaultSubobject<UStaticMeshComponent>("Projectile Mesh");
 	RootComponent = MeshComp;
+	ProjectileMovementCmp = CreateDefaultSubobject<UProjectileMovementComponent>("Projectile Movement Component");
+	ProjectileMovementCmp->MaxSpeed = 1300.f;
+	ProjectileMovementCmp->InitialSpeed = 1300.f;
 }
 
 // Called when the game starts or when spawned
