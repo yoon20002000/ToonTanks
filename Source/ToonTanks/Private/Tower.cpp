@@ -31,7 +31,6 @@ void ATower::CheckFireCondition()
 {
 	if(IsInFireRange())
 	{
-		UE_LOG(LogTemp, Log, TEXT("Called %s"), *GetName());
 		Fire();
 	}
 }
