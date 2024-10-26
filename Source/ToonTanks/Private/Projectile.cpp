@@ -27,6 +27,10 @@ void AProjectile::BeginPlay()
 	Super::BeginPlay();
 	MeshComp->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 	ensure(HitParticles);
+	ensure(LaunchSound);
+	ensure(HitSound);
+
+	UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation(), GetActorRotation());
 }
 
 // Called every frame
@@ -52,9 +56,10 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, OwnerInstigator, this, DamageTypeClass);
 		UE_LOG(LogTemp, Log, TEXT(" Hit Comp : %s, Other Hit Actor : %s, Other Comp : %s"), *HitComponent->GetName(),
-	   *OtherActor->GetName(), *OtherComp->GetName());
+		       *OtherActor->GetName(), *OtherComp->GetName());
 
 		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
 	}
+	UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation(), GetActorRotation());
 	Destroy();
 }
