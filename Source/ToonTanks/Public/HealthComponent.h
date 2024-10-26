@@ -7,6 +7,8 @@
 #include "HealthComponent.generated.h"
 
 
+class AToonTanksGameMode;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TOONTANKS_API UHealthComponent : public UActorComponent
 {
@@ -16,6 +18,7 @@ private:
 	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
 	float MaxHealth = 100.f;
 	float Health = 0.f;
+	TObjectPtr<AToonTanksGameMode> ToonTanksGameMode;
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();

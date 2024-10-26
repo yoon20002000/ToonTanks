@@ -30,10 +30,10 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (PlayerControllerRef != nullptr)
+	if (TankPlayerController != nullptr)
 	{
 		FHitResult HitResult;
-		PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
+		TankPlayerController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
 		if (HitResult.IsValidBlockingHit())
 		{
 			DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
@@ -42,10 +42,18 @@ void ATank::Tick(float DeltaTime)
 	}
 }
 
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerControllerRef = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 void ATank::Move(float InValue)

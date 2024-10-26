@@ -15,7 +15,6 @@ UCLASS()
 class TOONTANKS_API ATank : public ABasePawn
 {
 	GENERATED_BODY()
-
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	TObjectPtr<UCameraComponent> CameraComp;
@@ -26,12 +25,17 @@ private:
 	UPROPERTY(EditAnywhere)
 	float TurnRate = 45.0f;
 	UPROPERTY()
-	TObjectPtr<APlayerController> PlayerControllerRef;
+	TObjectPtr<APlayerController> TankPlayerController;
 public:
 	ATank();
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void HandleDestruction() override;
+	APlayerController* GetTankPlayerController() const
+	{
+		return TankPlayerController;
+	}
 protected:
 	virtual void BeginPlay() override;
 private:
