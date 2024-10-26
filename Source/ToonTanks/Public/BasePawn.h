@@ -16,7 +16,9 @@ class TOONTANKS_API ABasePawn : public APawn
 protected:
 	UPROPERTY(EditAnywhere)
 	float TurretInterpSpeed = 5.f;
-
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<class UParticleSystem> DeathParticle;
+	
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCapsuleComponent> CapsuleComponent;
@@ -30,6 +32,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileClass;
+
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
