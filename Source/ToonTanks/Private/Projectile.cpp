@@ -2,15 +2,15 @@
 
 
 #include "Projectile.h"
-
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	MeshComp =CreateDefaultSubobject<UStaticMeshComponent>("Projectile Mesh");
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("Projectile Mesh");
 	RootComponent = MeshComp;
 	ProjectileMovementCmp = CreateDefaultSubobject<UProjectileMovementComponent>("Projectile Movement Component");
 	ProjectileMovementCmp->MaxSpeed = 1300.f;
@@ -28,12 +28,25 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	FVector NormalImpulse, const FHitResult& Hit)
+                        FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Log, TEXT(" Hit Comp : %s, Other Hit Actor : %s, Other Comp : %s"), *HitComponent->GetName(),*OtherActor->GetName(), *OtherComp->GetName());
-}
+	AActor* ThisOwner = GetOwner();
 
+	if (ThisOwner == nullptr)
+	{
+		return;
+	}
+	AController* OwnerInstigator = ThisOwner->GetInstigatorController();
+	UClass* DamageTypeClass = UDamageType::StaticClass();
+
+	if (OtherActor != nullptr && OtherActor != this && OtherActor != ThisOwner)
+	{
+		UGameplayStatics::ApplyDamage(OtherActor, Damage, OwnerInstigator, this, DamageTypeClass);
+		UE_LOG(LogTemp, Log, TEXT(" Hit Comp : %s, Other Hit Actor : %s, Other Comp : %s"), *HitComponent->GetName(),
+	   *OtherActor->GetName(), *OtherComp->GetName());
+		Destroy();
+	}
+}

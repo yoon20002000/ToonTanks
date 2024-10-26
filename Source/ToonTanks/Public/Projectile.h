@@ -18,6 +18,9 @@ private:
 	TObjectPtr<UStaticMeshComponent> MeshComp;
 	UPROPERTY(VisibleAnywhere, Category = "Projectile")
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovementCmp;
+	
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	float Damage = 50.f;
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
