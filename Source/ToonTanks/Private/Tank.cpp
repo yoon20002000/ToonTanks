@@ -2,6 +2,8 @@
 
 
 #include "Tank.h"
+
+#include "ToonTanksPlayerController.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -53,7 +55,7 @@ void ATank::HandleDestruction()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankPlayerController = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<AToonTanksPlayerController>(GetController());
 }
 
 void ATank::Move(float InValue)

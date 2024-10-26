@@ -3,18 +3,18 @@
 
 #include "ToonTanksGameMode.h"
 #include "Tank.h"
+#include "ToonTanksPlayerController.h"
 #include "Tower.h"
 #include "Kismet/GameplayStatics.h"
 
 void AToonTanksGameMode::ActorDied(AActor* DeadActor)
 {
-	if(DeadActor == Tank)
+	if (DeadActor == Tank)
 	{
 		Tank->HandleDestruction();
-		if(APlayerController* TankPlayerController = Tank->GetTankPlayerController(); TankPlayerController != nullptr)
+		if (ToonTanksPlayerController != nullptr)
 		{
-			Tank->DisableInput(TankPlayerController);
-			TankPlayerController->bShowMouseCursor = false;
+			ToonTanksPlayerController->SetPlayerEnabledState(false);
 		}
 	}
 	else if (ATower* Tower = Cast<ATower>(DeadActor); Tower != nullptr)
@@ -28,5 +28,5 @@ void AToonTanksGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
-	
+	ToonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 }

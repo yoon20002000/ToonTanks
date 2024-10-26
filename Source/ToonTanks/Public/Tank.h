@@ -6,6 +6,7 @@
 #include "BasePawn.h"
 #include "Tank.generated.h"
 
+class AToonTanksPlayerController;
 class USpringArmComponent;
 class UCameraComponent;
 /**
@@ -25,14 +26,14 @@ private:
 	UPROPERTY(EditAnywhere)
 	float TurnRate = 45.0f;
 	UPROPERTY()
-	TObjectPtr<APlayerController> TankPlayerController;
+	TObjectPtr<AToonTanksPlayerController> TankPlayerController;
 public:
 	ATank();
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void HandleDestruction() override;
-	APlayerController* GetTankPlayerController() const
+	AToonTanksPlayerController* GetTankPlayerController() const
 	{
 		return TankPlayerController;
 	}

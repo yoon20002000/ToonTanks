@@ -15,6 +15,7 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 	GENERATED_BODY()
 private :
 	TObjectPtr<class ATank> Tank;
+	TObjectPtr<class AToonTanksPlayerController> ToonTanksPlayerController;
 public:
 	void ActorDied(AActor* DeadActor);
 protected:
