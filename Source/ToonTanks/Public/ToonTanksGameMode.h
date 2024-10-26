@@ -18,7 +18,10 @@ private :
 	TObjectPtr<class AToonTanksPlayerController> ToonTanksPlayerController;
 
 	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-	float StartDelay = 3.0f; 
+	float StartDelay = 3.0f;
+
+	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+	int32 TargetTowers = 0;
 public:
 	void ActorDied(AActor* DeadActor);
 protected:
@@ -26,6 +29,9 @@ protected:
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartGame();
+	UFUNCTION(BlueprintImplementableEvent)
+	void GameOver(bool bIsWonGame);
 private:
 	void HandleGameStart();
+	int32 GetTargetTowerCount() const;
 };
