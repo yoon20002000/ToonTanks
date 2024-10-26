@@ -26,6 +26,7 @@ void UHealthComponent::BeginPlay()
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::DamageTaken);
 
 	ToonTanksGameMode = Cast<AToonTanksGameMode>(UGameplayStatics::GetGameMode(this));
+	bIsAlive = true;
 }
 
 void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
@@ -34,9 +35,10 @@ void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDa
 	UE_LOG(LogTemp, Log, TEXT("Actor %s, HP: %f"), *GetOwner()->GetName(), Health);
 
 	Health -= Damage;
-	if (Health <= 0.f && ToonTanksGameMode != nullptr)
+	if (bIsAlive ==true && Health <= 0.f && ToonTanksGameMode != nullptr)
 	{
 		ToonTanksGameMode->ActorDied(DamagedActor);
+		bIsAlive = false;
 		return;
 	}
 }

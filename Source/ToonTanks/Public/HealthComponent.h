@@ -19,6 +19,7 @@ private:
 	float MaxHealth = 100.f;
 	float Health = 0.f;
 	TObjectPtr<AToonTanksGameMode> ToonTanksGameMode;
+	bool bIsAlive = true;
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
