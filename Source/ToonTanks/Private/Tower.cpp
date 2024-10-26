@@ -44,7 +44,7 @@ void ATower::CheckFireCondition()
 
 bool ATower::IsInFireRange() const
 {
-	if(Tank == nullptr)
+	if(Tank == nullptr && Tank->GetIsAlive() == false)
 	{
 		return false;
 	}
