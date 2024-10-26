@@ -18,6 +18,8 @@ private:
 	TObjectPtr<UStaticMeshComponent> MeshComp;
 	UPROPERTY(VisibleAnywhere, Category = "Projectile")
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovementCmp;
+	UPROPERTY(VisibleAnywhere, Category= "Projectile")
+	TObjectPtr<UParticleSystemComponent> ParticleSystemCmp;
 	
 	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float Damage = 50.f;
