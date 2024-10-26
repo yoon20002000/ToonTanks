@@ -30,6 +30,8 @@ private:
 	TObjectPtr<class USoundBase> LaunchSound;
 	UPROPERTY(EditAnywhere, Category="Combat", meta=(AllowPrivateAccess=true))
 	TObjectPtr<class USoundBase> HitSound;
+	UPROPERTY(EditAnywhere, Category="Combat", meta=(AllowPrivateAccess=true))
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();

@@ -35,6 +35,8 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<class USoundBase> DeathSound;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
