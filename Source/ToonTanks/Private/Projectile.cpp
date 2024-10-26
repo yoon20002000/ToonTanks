@@ -22,6 +22,7 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	MeshComp->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+	ensure(HitParticles);
 }
 
 // Called every frame
@@ -37,6 +38,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 
 	if (ThisOwner == nullptr)
 	{
+		Destroy();
 		return;
 	}
 	AController* OwnerInstigator = ThisOwner->GetInstigatorController();
@@ -47,6 +49,8 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, OwnerInstigator, this, DamageTypeClass);
 		UE_LOG(LogTemp, Log, TEXT(" Hit Comp : %s, Other Hit Actor : %s, Other Comp : %s"), *HitComponent->GetName(),
 	   *OtherActor->GetName(), *OtherComp->GetName());
-		Destroy();
+
+		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
 	}
+	Destroy();
 }

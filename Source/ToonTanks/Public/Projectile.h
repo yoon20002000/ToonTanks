@@ -21,6 +21,8 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float Damage = 50.f;
+	UPROPERTY(EditAnywhere, Category="Projectile", meta=(AllowPrivateAccess=true))
+	TObjectPtr<class UParticleSystem> HitParticles;
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
