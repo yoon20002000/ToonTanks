@@ -16,8 +16,13 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 private :
 	TObjectPtr<class ATank> Tank;
 	TObjectPtr<class AToonTanksPlayerController> ToonTanksPlayerController;
+
+	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+	float StartDelay = 3.0f; 
 public:
 	void ActorDied(AActor* DeadActor);
 protected:
 	virtual void BeginPlay() override;
+private:
+	void HandleGameStart();
 };

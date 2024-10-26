@@ -38,7 +38,6 @@ void ATank::Tick(float DeltaTime)
 		TankPlayerController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
 		if (HitResult.IsValidBlockingHit())
 		{
-			DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 20, 30, FColor::Red);
 			RotateTurret(HitResult.ImpactPoint);
 		}
 	}
